@@ -1,0 +1,7 @@
+1,Tariff A,25
+2,Tariff B,30
+3,Tariff C,35
+4,Tariff D,40
+5,Tariff E,45
+6,Tariff F,50
+7,Tariff G,55

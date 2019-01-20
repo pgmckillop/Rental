@@ -1,0 +1,6 @@
+1,1,Mondeo
+2,1,Fiesta
+3,1,Transit
+4,2,GM Saloon
+5,3,Hi-Lux
+6,3,Avensis

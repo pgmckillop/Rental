@@ -1,0 +1,4 @@
+1,Private on account
+2,Private Pay Advance
+3,Commercial on Account
+4,Commercial Pay Advance
