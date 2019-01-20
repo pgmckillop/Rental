@@ -1,0 +1,15 @@
+--BULK IMPORT
+BULK
+INSERT Manufacturer
+FROM 'C:\Rental\Manufacturer.txt'
+WITH
+(
+FIELDTERMINATOR = ',',
+ROWTERMINATOR = '\n'
+)
+GO
+
+
+--Check
+SELECT * FROM Manufacturer
+GO
