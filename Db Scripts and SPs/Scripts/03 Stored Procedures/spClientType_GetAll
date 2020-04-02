@@ -1,0 +1,21 @@
+/****** Object:  StoredProcedure [dbo].[spClientType_GetAll]    Script Date: 02/04/2020 11:52:10 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROC [dbo].[spClientType_GetAll]
+
+AS
+
+BEGIN
+	SELECT id,
+	ClientTypeName
+	
+	FROM ClientType
+END
+GO
+
+

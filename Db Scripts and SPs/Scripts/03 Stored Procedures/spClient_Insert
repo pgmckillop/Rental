@@ -1,0 +1,38 @@
+/****** Object:  StoredProcedure [dbo].[spClient_Insert]    Script Date: 02/04/2020 11:50:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[spClient_Insert]
+(
+	@ClientType_id int,
+	@ClientForename varchar(255),
+	@ClientSurname varchar(255),
+	@AccountNumber varchar(20),
+	@MobilePhone varchar(20)
+)
+
+AS
+BEGIN
+INSERT INTO Client (
+	ClientType_id,
+	ClientForename,
+	ClientSurname,
+	AccountNumber,
+	MobilePhone)
+	
+	VALUES (
+	@ClientType_id,
+	@ClientForename,
+	@ClientSurname,
+	@AccountNumber,
+	@MobilePhone
+	)
+
+END
+GO
+
+

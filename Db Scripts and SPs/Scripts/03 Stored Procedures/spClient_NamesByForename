@@ -1,0 +1,26 @@
+/****** Object:  StoredProcedure [dbo].[spClient_NamesByForename]    Script Date: 02/04/2020 11:51:08 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROC [dbo].[spClient_NamesByForename]
+
+AS
+
+BEGIN
+	SELECT 
+		id,
+		ClientForename + ', ' + ClientSurname as NameByForename
+		
+		FROM
+		
+		Client
+
+		ORDER BY NameByForename ASC
+END
+GO
+
+

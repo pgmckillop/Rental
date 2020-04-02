@@ -1,0 +1,197 @@
+CREATE TABLE Manufacturer (
+  id INTEGER  NOT NULL   IDENTITY ,
+  ManufacturerName VARCHAR(45)  NOT NULL    ,
+PRIMARY KEY(id));
+GO
+
+
+
+
+CREATE TABLE VehicleType (
+  id INTEGER  NOT NULL   IDENTITY ,
+  VehicleTypeName VARCHAR(45)      ,
+PRIMARY KEY(id));
+GO
+
+
+
+
+CREATE TABLE ClientType (
+  id INTEGER  NOT NULL   IDENTITY ,
+  ClientTypeName VARCHAR(255)  NOT NULL    ,
+PRIMARY KEY(id));
+GO
+
+
+
+
+CREATE TABLE Tariff (
+  id INTEGER  NOT NULL   IDENTITY ,
+  TariffName VARCHAR(20)  NOT NULL  ,
+  TariffRate FLOAT  NOT NULL    ,
+PRIMARY KEY(id));
+GO
+
+
+
+
+CREATE TABLE StaffType (
+  id INTEGER  NOT NULL   IDENTITY ,
+  StaffTypeName VARCHAR(20)  NOT NULL    ,
+PRIMARY KEY(id));
+GO
+
+
+
+
+CREATE TABLE Staff (
+  id INTEGER  NOT NULL   IDENTITY ,
+  StaffType_id INTEGER  NOT NULL  ,
+  StaffRef VARCHAR(20)    ,
+  StaffForename VARCHAR(45)  NOT NULL  ,
+  StaffSurname VARCHAR(255)  NOT NULL  ,
+  Extension INTEGER      ,
+PRIMARY KEY(id)  ,
+  FOREIGN KEY(StaffType_id)
+    REFERENCES StaffType(id));
+GO
+
+
+CREATE INDEX Staff_FKIndex1 ON Staff (StaffType_id);
+GO
+
+
+CREATE INDEX IFK_StaffRole ON Staff (StaffType_id);
+GO
+
+
+CREATE TABLE Client (
+  id INTEGER  NOT NULL   IDENTITY ,
+  ClientType_id INTEGER  NOT NULL  ,
+  ClientForename VARCHAR(45)  NOT NULL  ,
+  ClientSurname VARCHAR(255)  NOT NULL  ,
+  AccountNumber VARCHAR(20)  NOT NULL  ,
+  MobilePhone VARCHAR(20)      ,
+PRIMARY KEY(id)  ,
+  FOREIGN KEY(ClientType_id)
+    REFERENCES ClientType(id));
+GO
+
+
+CREATE INDEX Client_FKIndex1 ON Client (ClientType_id);
+GO
+
+
+CREATE INDEX IFK_ClientStatus ON Client (ClientType_id);
+GO
+
+
+CREATE TABLE ClientAddress (
+  id INTEGER  NOT NULL   IDENTITY ,
+  Client_id INTEGER  NOT NULL  ,
+  Address1 VARCHAR(255)    ,
+  Address2 VARCHAR(255)    ,
+  Town VARCHAR(255)    ,
+  County VARCHAR(255)    ,
+  Landline VARCHAR(20)      ,
+PRIMARY KEY(id)  ,
+  FOREIGN KEY(Client_id)
+    REFERENCES Client(id));
+GO
+
+
+CREATE INDEX ClientAddress_FKIndex1 ON ClientAddress (Client_id);
+GO
+
+
+CREATE INDEX IFK_ClientLocation ON ClientAddress (Client_id);
+GO
+
+
+CREATE TABLE Model (
+  id INTEGER  NOT NULL   IDENTITY ,
+  Manufacturer_id INTEGER  NOT NULL  ,
+  ModelName VARCHAR(255)  NOT NULL    ,
+PRIMARY KEY(id)  ,
+  FOREIGN KEY(Manufacturer_id)
+    REFERENCES Manufacturer(id));
+GO
+
+
+CREATE INDEX Model_FKIndex1 ON Model (Manufacturer_id);
+GO
+
+
+CREATE INDEX IFK_Makes ON Model (Manufacturer_id);
+GO
+
+
+CREATE TABLE Vehicle (
+  id INTEGER  NOT NULL   IDENTITY ,
+  VehicleType_id INTEGER  NOT NULL  ,
+  Model_id INTEGER  NOT NULL  ,
+  Registration VARCHAR(20)  NOT NULL  ,
+  DateOnFleet DATE    ,
+  Gearbox VARCHAR(20)    ,
+  MaxLadenWeight VARCHAR(20)      ,
+PRIMARY KEY(id)    ,
+  FOREIGN KEY(Model_id)
+    REFERENCES Model(id),
+  FOREIGN KEY(VehicleType_id)
+    REFERENCES VehicleType(id));
+GO
+
+
+CREATE INDEX Vehicle_FKIndex1 ON Vehicle (Model_id);
+GO
+CREATE INDEX Vehicle_FKIndex2 ON Vehicle (VehicleType_id);
+GO
+
+
+CREATE INDEX IFK_ModelVehicle ON Vehicle (Model_id);
+GO
+CREATE INDEX IFK_TypeOfVehicle ON Vehicle (VehicleType_id);
+GO
+
+
+CREATE TABLE Rental (
+  id INTEGER  NOT NULL   IDENTITY ,
+  Tariff_id INTEGER  NOT NULL  ,
+  Client_id INTEGER  NOT NULL  ,
+  Staff_id INTEGER  NOT NULL  ,
+  Vehicle_id INTEGER  NOT NULL  ,
+  RentalDate DATE  NOT NULL  ,
+  PeriodDays INTEGER  NOT NULL    ,
+PRIMARY KEY(id)        ,
+  FOREIGN KEY(Vehicle_id)
+    REFERENCES Vehicle(id),
+  FOREIGN KEY(Staff_id)
+    REFERENCES Staff(id),
+  FOREIGN KEY(Client_id)
+    REFERENCES Client(id),
+  FOREIGN KEY(Tariff_id)
+    REFERENCES Tariff(id));
+GO
+
+
+CREATE INDEX Rental_FKIndex1 ON Rental (Vehicle_id);
+GO
+CREATE INDEX Rental_FKIndex2 ON Rental (Staff_id);
+GO
+CREATE INDEX Rental_FKIndex3 ON Rental (Client_id);
+GO
+CREATE INDEX Rental_FKIndex4 ON Rental (Tariff_id);
+GO
+
+
+CREATE INDEX IFK_VehicleRental ON Rental (Vehicle_id);
+GO
+CREATE INDEX IFK_StaffRental ON Rental (Staff_id);
+GO
+CREATE INDEX IFK_ClientRental ON Rental (Client_id);
+GO
+CREATE INDEX IFK_RentalRate ON Rental (Tariff_id);
+GO
+
+
+

@@ -1,0 +1,45 @@
+/****** Object:  StoredProcedure [dbo].[spClient_InsertAddress]    Script Date: 02/04/2020 11:50:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROC [dbo].[spClient_InsertAddress]
+(
+	@Client_Id int,
+	@Address1 varchar(255),
+	@Address2 varchar(255),
+	@Town varchar(255),
+	@County varchar(255),
+	@Postcode varchar(10),
+	@Landline varchar(20)
+)
+AS
+
+BEGIN
+
+INSERT INTO ClientAddress(
+	Client_id,
+	Address1,
+	Address2,
+	Town,
+	County,
+	Postcode,
+	Landline
+)
+
+VALUES(
+	@Client_Id,
+	@Address1,
+	@Address2,
+	@Town,
+	@County,
+	@Postcode,
+	@Landline
+)
+
+END
+GO
+
+
