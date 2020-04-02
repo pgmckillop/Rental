@@ -1,0 +1,46 @@
+/****** Object:  StoredProcedure [dbo].[spVehicle_Insert]    Script Date: 02/04/2020 11:53:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[spVehicle_Insert]
+
+(
+	
+	@VehicleType_id int,
+	@Model_id int,
+	@Registration varchar(20),
+	@DateOnFleet date,
+	@Gearbox varchar(20),
+	@MaxLadenWeight int
+)
+
+AS
+
+BEGIN
+	INSERT INTO Vehicle (
+		VehicleType_id,
+		Model_id,
+		Registration,
+		DateOnFleet,
+		Gearbox,
+		MaxLadenWeight
+	)
+
+	VALUES (
+	@VehicleType_id,
+	@Model_id,
+	@Registration,
+	@DateOnFleet,
+	@Gearbox,
+	@MaxLadenWeight
+	)
+
+END
+GO
+
+

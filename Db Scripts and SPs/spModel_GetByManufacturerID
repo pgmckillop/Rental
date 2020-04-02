@@ -1,0 +1,25 @@
+/****** Object:  StoredProcedure [dbo].[spModel_GetByManufacturerID]    Script Date: 02/04/2020 11:52:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROC [dbo].[spModel_GetByManufacturerID]
+	@ManufacturerID int
+
+AS
+
+BEGIN
+	SELECT id,
+	ModelName
+	
+	FROM Model
+	
+	WHERE (Manufacturer_id = @ManufacturerID)
+END
+GO
+
+
